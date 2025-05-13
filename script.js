@@ -20,4 +20,33 @@ document.addEventListener('DOMContentLoaded', function() {
   // 4. Display the count on the webpage
 
   // your code here
+  function updateCount() {
+    let count = getCookie("count");
+    count = count ? parseInt(count) + 1 : 1;
+    setCookie("count", count, 7);
+    document.getElementById("count-display").textContent = count;
+  }
+
+  function resetCount() {
+    setCookie("count", 0, 7);
+    document.getElementById("count-display").textContent = 0;
+  }
+
+  let displayElement = document.createElement("p");
+  displayElement.innerHTML = "Page Visits: <span id='count-display'></span>";
+  document.body.appendChild(displayElement);
+
+  let resetButton = document.createElement("button");
+  resetButton.textContent = "Reset Count";
+  resetButton.style.padding = "10px";
+  resetButton.style.marginTop = "10px";
+  resetButton.style.cursor = "pointer";
+  document.body.appendChild(resetButton);
+
+  // Update count on page load
+  updateCount();
+
+  // Attach reset functionality to button
+  resetButton.addEventListener("click", resetCount);
+
 });
